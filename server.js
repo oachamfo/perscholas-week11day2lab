@@ -9,10 +9,13 @@ const app = express();
 // Mount middleware (app.use)
 
 // Mount routes
+
+//greeting route
 app.get("/greeting", function (req, res) {
   res.send("<h1>Hello World!</h1>");
 });
 
+//greeting route with name param
 app.get("/greeting/:name", function (req, res) {
   res.send(
     "<h1>Hello" +
@@ -21,6 +24,32 @@ app.get("/greeting/:name", function (req, res) {
       "." +
       " " +
       "It's so great to see you!" +
+      "</h1>"
+  );
+});
+
+//tip calculator
+const calculateTip = (req) => {
+  const total = parseInt(req.params.total);
+  const tipPercentage = parseInt(req.params.tipPercentage);
+  const tip = total / tipPercentage;
+  return tip;
+};
+app.get("/tip/:total/:tipPercentage/", function (req, res) {
+  const tip = calculateTip(req);
+  res.send(
+    "Total:" +
+      " " +
+      "$" +
+      req.params.total +
+      " " +
+      "Percentage: " +
+      req.params.tipPercentage +
+      "%" +
+      "<br>" +
+      "Tip: " +
+      "$" +
+      `${tip}` +
       "</h1>"
   );
 });
