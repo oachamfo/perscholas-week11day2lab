@@ -1,14 +1,8 @@
-// Require modules
+// require express module
 const express = require("express");
 
-// Create the Express app
+// create express app
 const app = express();
-
-// Configure the app (app.set)
-
-// Mount middleware (app.use)
-
-// Mount routes
 
 //generic greeting route
 app.get("/greeting", function (req, res) {
@@ -65,6 +59,8 @@ app.get("/tip/:total/:tipPercentage/", function (req, res) {
 });
 
 //Magic 8 Ball
+
+//function to pick a random answer
 const pickMagic8Ball = () => {
   const magic8ball = [
     "It is certain",
@@ -89,10 +85,16 @@ const pickMagic8Ball = () => {
     "Very doubtful",
   ];
 
+  //randomly pick a decimal between 0 and 1
+  //0 inclusive but 1 exclusive
   let randomIndex = Math.random();
   console.log(randomIndex);
+  //since randomIndex will be less than 1,
+  //multiplying by length of array will never equal the length of the array
   randomIndex *= magic8ball.length;
   console.log(randomIndex);
+  //use floor() method to get an integer that is less than the array length
+  //but not less than 0, which is what an array index is
   randomIndex = Math.floor(randomIndex);
   console.log(randomIndex);
   let answer = magic8ball[randomIndex];
@@ -106,7 +108,7 @@ app.get("/magic/:question", function (req, res) {
   );
 });
 
-// Tell the app to listen on port 3000
+//makes app listen on port 3000
 app.listen(3000, function () {
   console.log("Listening on port 3000");
 });
